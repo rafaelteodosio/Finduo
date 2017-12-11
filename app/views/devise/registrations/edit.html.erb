@@ -1,0 +1,84 @@
+<style>
+  .div_edit
+    {
+      background-color: #000;
+      background-size: 100%;
+      width: 100%;
+      height: 100%;
+      color: #4169E1;
+      text-align: center;
+    }
+
+    .logo{
+      font-family: cursive;
+        font-size: 30pt;
+        color: #4169E1;
+        padding: 30px;
+        width: 30%;
+        text-align: left;
+    }
+
+</style>
+
+<div class="div_edit">
+<p class="logo">FinDUO?</p>
+
+<h2>Editar</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+
+  <div class="field">
+    <%= f.label :Nickname %><br />
+    <%= f.text_field :nickname, autofocus: true %>
+  </div>
+</br>
+
+  <div class="field">
+    <%= f.label :elo %><br />
+    <%= f.text_field :elo, autofocus: true %>
+  </div>
+</br>
+  <div class="field">
+    <%= f.label :data_de_nascimento %><br />
+    <%= f.date_field :data_de_nascimento, autofocus: true %>
+  </div>
+</br>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+</br>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+</br>
+  <div class="field">
+    <%= f.label :nova_senha %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+</br>
+  <div class="field">
+    <%= f.label :confirmar_nova_senha %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+</br>
+  <div class="field">
+    <%= f.label :senha_atual %> <br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+</br>
+  <div class="actions">
+    <%= f.submit "Atualizar" %>
+  </div>
+<% end %>
+
+<p> <%= button_to "Apagar minha conta", registration_path(resource_name), data: { confirm: "Tem certeza?" }, method: :delete %></p>
+
+<%= link_to "Voltar", :back %>

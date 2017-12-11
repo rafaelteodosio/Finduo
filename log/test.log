@@ -1,0 +1,360 @@
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "admins"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "failed_attempts" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "commontator_comments"[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "commontator_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "creator_type" varchar, "creator_id" integer, "editor_type" varchar, "editor_id" integer, "thread_id" integer NOT NULL, "body" text NOT NULL, "deleted_at" datetime, "cached_votes_up" integer DEFAULT 0, "cached_votes_down" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_commontator_comments_on_cached_votes_down" ON "commontator_comments" ("cached_votes_down")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_commontator_comments_on_cached_votes_down' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_commontator_comments_on_cached_votes_down' AND type='index'
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_commontator_comments_on_cached_votes_up" ON "commontator_comments" ("cached_votes_up")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_commontator_comments_on_cached_votes_up' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_commontator_comments_on_cached_votes_up' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_commontator_comments_on_cached_votes_down' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_commontator_comments_on_cached_votes_down' AND type='index'
+[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE  INDEX "index_commontator_comments_on_c_id_and_c_type_and_t_id" ON "commontator_comments" ("creator_id", "creator_type", "thread_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_commontator_comments_on_c_id_and_c_type_and_t_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_commontator_comments_on_c_id_and_c_type_and_t_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_commontator_comments_on_cached_votes_up' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_commontator_comments_on_cached_votes_up' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_commontator_comments_on_cached_votes_down' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_commontator_comments_on_cached_votes_down' AND type='index'
+[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE  INDEX "index_commontator_comments_on_thread_id_and_created_at" ON "commontator_comments" ("thread_id", "created_at")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "commontator_subscriptions"[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "commontator_subscriptions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "subscriber_type" varchar NOT NULL, "subscriber_id" integer NOT NULL, "thread_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_commontator_subscriptions_on_s_id_and_s_type_and_t_id" ON "commontator_subscriptions" ("subscriber_id", "subscriber_type", "thread_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_commontator_subscriptions_on_s_id_and_s_type_and_t_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_commontator_subscriptions_on_s_id_and_s_type_and_t_id' AND type='index'
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_commontator_subscriptions_on_thread_id" ON "commontator_subscriptions" ("thread_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "commontator_threads"[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "commontator_threads" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "commontable_type" varchar, "commontable_id" integer, "closed_at" datetime, "closer_type" varchar, "closer_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_commontator_threads_on_c_id_and_c_type" ON "commontator_threads" ("commontable_id", "commontable_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "rs_evaluations"[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "rs_evaluations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "reputation_name" varchar, "source_type" varchar, "source_id" integer, "target_type" varchar, "target_id" integer, "value" float DEFAULT 0.0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "data" text)[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_rs_evaluations_on_reputation_name_and_source_and_target" ON "rs_evaluations" ("reputation_name", "source_id", "source_type", "target_id", "target_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_rs_evaluations_on_reputation_name" ON "rs_evaluations" ("reputation_name")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE  INDEX "index_rs_evaluations_on_source_id_and_source_type" ON "rs_evaluations" ("source_id", "source_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_source_id_and_source_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_source_id_and_source_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE  INDEX "index_rs_evaluations_on_source_type_and_source_id" ON "rs_evaluations" ("source_type", "source_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_source_type_and_source_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_source_type_and_source_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_source_id_and_source_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_source_id_and_source_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_rs_evaluations_on_target_id_and_target_type" ON "rs_evaluations" ("target_id", "target_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_target_id_and_target_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_target_id_and_target_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_source_type_and_source_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_source_type_and_source_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_source_id_and_source_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_source_id_and_source_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_evaluations_on_reputation_name_and_source_and_target' AND type='index'
+[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE  INDEX "index_rs_evaluations_on_target_type_and_target_id" ON "rs_evaluations" ("target_type", "target_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "rs_reputation_messages"[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "rs_reputation_messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sender_type" varchar, "sender_id" integer, "receiver_id" integer, "weight" float DEFAULT 1.0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_rs_reputation_messages_on_receiver_id_and_sender" ON "rs_reputation_messages" ("receiver_id", "sender_id", "sender_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id_and_sender' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id_and_sender' AND type='index'
+[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE  INDEX "index_rs_reputation_messages_on_receiver_id" ON "rs_reputation_messages" ("receiver_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id_and_sender' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id_and_sender' AND type='index'
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_rs_reputation_messages_on_sender_id_and_sender_type" ON "rs_reputation_messages" ("sender_id", "sender_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputation_messages_on_sender_id_and_sender_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputation_messages_on_sender_id_and_sender_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id_and_sender' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputation_messages_on_receiver_id_and_sender' AND type='index'
+[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE  INDEX "index_rs_reputation_messages_on_sender_type_and_sender_id" ON "rs_reputation_messages" ("sender_type", "sender_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "rs_reputations"[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "rs_reputations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "reputation_name" varchar, "value" float DEFAULT 0.0, "aggregated_by" varchar, "target_type" varchar, "target_id" integer, "active" boolean DEFAULT 't', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "data" text)[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_rs_reputations_on_reputation_name_and_target" ON "rs_reputations" ("reputation_name", "target_id", "target_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputations_on_reputation_name_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputations_on_reputation_name_and_target' AND type='index'
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_rs_reputations_on_reputation_name" ON "rs_reputations" ("reputation_name")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputations_on_reputation_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputations_on_reputation_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputations_on_reputation_name_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputations_on_reputation_name_and_target' AND type='index'
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX "index_rs_reputations_on_target_id_and_target_type" ON "rs_reputations" ("target_id", "target_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputations_on_target_id_and_target_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputations_on_target_id_and_target_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputations_on_reputation_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputations_on_reputation_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_rs_reputations_on_reputation_name_and_target' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_rs_reputations_on_reputation_name_and_target' AND type='index'
+[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE  INDEX "index_rs_reputations_on_target_type_and_target_id" ON "rs_reputations" ("target_type", "target_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "nome" varchar, "sobrenome" varchar, "sobre" text, "data_de_nascimento" date, "preco" integer, "telephone" varchar, "cidade" varchar, "avatar_file_name" varchar, "avatar_content_type" varchar, "avatar_file_size" integer, "avatar_updated_at" datetime, "letter_file_name" varchar, "letter_content_type" varchar, "letter_file_size" integer, "letter_updated_at" datetime)[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (4.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171209232933)[0m
+  [1m[35m (4.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20171207004226),
+(20171209053132),
+(20171209171403),
+(20171209171406),
+(20171209165202),
+(20171209171409),
+(20171209171408),
+(20171209171404),
+(20171209171410),
+(20171208125350),
+(20171209171402),
+(20171209215911),
+(20171209171405),
+(20171209171407);
+
+[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", "2017-12-10 12:23:22.784115"], ["updated_at", "2017-12-10 12:23:22.784115"]]
+  [1m[35m (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "admins"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "admins" ("created_at", "updated_at", "id") VALUES ('2017-12-10 12:23:22.835672', '2017-12-10 12:23:22.835672', 980190962)[0m
+  [1m[36mFixture Insert (0.0ms)[0m  [1m[32mINSERT INTO "admins" ("created_at", "updated_at", "id") VALUES ('2017-12-10 12:23:22.835672', '2017-12-10 12:23:22.835672', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-10 12:23:22.837465', '2017-12-10 12:23:22.837465', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-10 12:23:22.837465', '2017-12-10 12:23:22.837465', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m

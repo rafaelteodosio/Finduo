@@ -1,0 +1,38 @@
+<style>
+  .div_busca
+    {
+      background-color: #000;
+      background-size: 100%;
+      width: 100%;
+      height: 100%;
+      color: #4169E1;
+      text-align: center;
+      font-family: Purisa;
+
+    }
+
+    .logo{
+      font-family: Purisa;
+        font-size: 30pt;
+        color: #4169E1;
+        padding: 30px;
+        width: 30%;
+        text-align: left;
+    }
+
+</style>
+<div class="div_busca">
+  <p class="logo">FinDUO?</p>
+
+<h1>Jogadores:</h1>
+<% @users = User.search(params[:search]) %>
+<% @users.each do |user| %>
+
+  <li> <%= "Nickname: "%><%=user.nickname %></li>
+<li>  <%= "Email: " + user.email %></li>
+<li>  <%= "Elo: " + user.elo %></li>
+</br></br>
+<% end %>
+</br></br></br></br>
+<p><%= link_to "Voltar", root_path %></p>
+</div>

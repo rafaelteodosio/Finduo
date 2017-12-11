@@ -1,0 +1,46 @@
+<style>
+  .div_pass
+    {
+      background-color: #000;
+      background-size: 100%;
+      width: 100%;
+      height: 100%;
+      color: #4169E1;
+      text-align: center;
+      font-family: Purisa;
+    }
+
+    .logo{
+      font-family: Purisa;
+        font-size: 30pt;
+        color: #4169E1;
+        padding: 30px;
+        width: 30%;
+        text-align: left;
+    }
+
+</style>
+
+<div class="div_pass">
+<p class="logo">FinDUO?</p>
+
+<h2>Esqueceu sua senha?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+</br>
+</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+  <div class="actions">
+     <div class="encontre-equipe">
+    <%= f.submit "Enviar" %>
+  </br></br></br></br>
+  </div>
+  </div>
+
+<% end %>
+</div>

@@ -1,0 +1,42 @@
+<style>
+  .div_perfil
+    {
+      background-color: #000;
+      background-size: 100%;
+      width: 100%;
+      height: 100%;
+      color: #4169E1;
+      text-align: center;
+      font-size: 30pt;
+      font-family: Purisa;
+    }
+
+    .logo{
+      font-family: Purisa;
+        font-size: 30pt;
+        color: #4169E1;
+        padding: 30px;
+        width: 30%;
+        text-align: left;
+    }
+
+</style>
+<div class="div_perfil">
+  <p class="logo">FinDUO?</p>
+<h2><%= "Nickname: " + nickname %></h2>
+
+<% if current_admin%>
+  <%= link_to "Destroy", admin_destroy_user_path(@user), method: :delete, data: { confirm: "You sure?" } %>
+<% end %>
+
+<p><%="Data de Nascimento: " + nascimento.to_s %></p>
+<p><%="Elo: " + @user.elo %></p>
+
+<p><%="Email: " + @user.email %></p>
+
+<br/>
+
+<br/>
+<br/>
+<p><%= link_to "Voltar", :back %></p>
+</div>

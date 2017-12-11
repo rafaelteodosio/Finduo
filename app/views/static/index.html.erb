@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FinDUO?</title>
+    <style>
+      body{
+        font-family: Purisa;
+      }
+    </style>
+  </head>
+  <body>
+   <header>
+     <menu>
+       <div class="bg-menu">
+       <p class="logo">FinDUO?</p>
+
+      </div>
+     </menu>
+   </header>
+   <div class="bg-corpo">
+     <div class="encontre-equipe">
+       <p><%= link_to "Buscar Todos Jogadores", users_list_path %></p>
+       <p>Digite O Elo Desejado</p>
+       <%= form_tag users_path, :method => 'get' do %>
+       <%= text_field_tag :search, params[:search] %>
+       <p name="botao-procurar">
+
+
+         <%= submit_tag "FinDUO?", :name => nil %>
+       </p>
+     <% end %>
+
+     </div>
+     <div class="caixa-grande">
+       <div class="caixa-pequena um">
+         <p>Encontre Jogadores</p>
+      </div>
+      <div class="caixa-pequena dois">
+        <p>Monte Um Time</p>
+     </div>
+     <div class="caixa-pequena tres">
+       <p>Ganhe Partidas</p>
+    </div>
+    </div>
+  </div>
+  <footer class="bg-rodape">
+    <p>FinDuo? - 2017</p>
+  </footer>
+  </body>
+</html>
